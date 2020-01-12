@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ResultActivity">
+    <RelativeLayout
+        android:background="@drawable/background"
+        android:layout_width="match_parent"
+        android:layout_height="200dp">
+
+        <ImageView
+            android:id="@+id/iconTemp"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="16dp"
+            android:layout_centerHorizontal="true"/>
+        <TextView
+            android:id="@+id/txtTemp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/iconTemp"
+            android:text="12 C"
+            android:textSize="32sp"
+            android:textColor="@color/md_white_1000"/>
+        <TextView
+            android:id="@+id/txtDeskripsi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/txtTemp"
+            android:layout_marginTop="16dp"
+            android:text="Berawan"
+            android:textColor="@color/md_white_1000"/>
+        <TextView
+            android:id="@+id/txtHari"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txtDeskripsi"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="8dp"
+            android:text="Juni 16, 09:00"
+            android:textColor="@color/md_white_1000"/>
+    </RelativeLayout>
+    <LinearLayout
+        android:layout_marginTop="-20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="10dp"
+        android:elevation="3dp"
+        android:background="@drawable/rectangle_white"
+        android:orientation="horizontal"
+        android:padding="10dp"
+        android:layout_gravity="center_vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:layout_marginRight="10dp"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_info"/>
+        <TextView
+            android:id="@+id/txtWelcome"
+            android:layout_gravity="center_vertical"
+            android:gravity="center_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Selamat datang Irham Mustofa Kamil"/>
+    </LinearLayout>
+
+
+    <GridView
+        android:id="@+id/listView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:numColumns="1"
+        android:verticalSpacing="8dp"
+        android:padding="16dp"
+        android:clipToPadding="false"
+        android:scrollbars="none"/>
+</LinearLayout>
