@@ -23,7 +23,7 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_below="@id/iconTemp"
-            android:text="12 C"
+            android:text=""
             android:textSize="32sp"
             android:textColor="@color/md_white_1000"/>
         <TextView
@@ -33,7 +33,7 @@
             android:layout_centerHorizontal="true"
             android:layout_below="@id/txtTemp"
             android:layout_marginTop="16dp"
-            android:text="Berawan"
+            android:text=""
             android:textColor="@color/md_white_1000"/>
         <TextView
             android:id="@+id/txtHari"
@@ -42,7 +42,7 @@
             android:layout_below="@id/txtDeskripsi"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="8dp"
-            android:text="Juni 16, 09:00"
+            android:text=""
             android:textColor="@color/md_white_1000"/>
     </RelativeLayout>
     <LinearLayout

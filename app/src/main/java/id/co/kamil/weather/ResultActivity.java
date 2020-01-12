@@ -20,6 +20,7 @@ import android.widget.Toast;
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.NetworkError;
+import com.android.volley.NetworkResponse;
 import com.android.volley.NoConnectionError;
 import com.android.volley.ParseError;
 import com.android.volley.Request;
@@ -68,6 +69,7 @@ public class ResultActivity extends AppCompatActivity {
         name = getIntent().getStringExtra("name");
         kodepos = getIntent().getStringExtra("kodepos");
 
+        iconTemp = findViewById(R.id.iconTemp);
         txtWelcome = findViewById(R.id.txtWelcome);
         txtTemp = findViewById(R.id.txtTemp);
         txtDeskripsi = findViewById(R.id.txtDeskripsi);
@@ -76,7 +78,19 @@ public class ResultActivity extends AppCompatActivity {
         String myFormat = "EEEE dd MMMM, HH:mm";
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat);
 
-        txtWelcome.setText("Selamat Sore, " + name);
+        int hour = currentCalender.get(Calendar.HOUR_OF_DAY);
+        if (hour >= 12) {
+            txtWelcome.setText("Selamat Siang, " + name);
+        }
+        if (hour >= 15) {
+            txtWelcome.setText("Selamat Sore, " + name);
+        }
+        if (hour >= 18) {
+            txtWelcome.setText("Selamat Malam, " + name);
+        }
+        if (hour >= 23) {
+            txtWelcome.setText("Selamat Pagi, " + name);
+        }
         txtHari.setText(sdf.format(currentCalender.getTime()));
 
         listView = findViewById(R.id.listView);
@@ -121,7 +135,13 @@ public class ResultActivity extends AppCompatActivity {
                                 String jam = new SimpleDateFormat("HH:mm").format(date);
                                 String tgl = hari + ", " + jam;
 
+                                Date current = new Date();
                                 item.setHari(tgl);
+                                if (date.before(current)) {
+                                    txtTemp.setText(temp);
+                                    txtDeskripsi.setText(deskripsi);
+                                    Picasso.with(ResultActivity.this).load("http://openweathermap.org/img/wn/" + icon + ".png").into(iconTemp);
+                                }
 
                             } catch (ParseException e) {
                                 e.printStackTrace();
@@ -149,6 +169,13 @@ public class ResultActivity extends AppCompatActivity {
             public void onErrorResponse(VolleyError error) {
                 pDialog.dismiss();
                 Log.i(TAG,"Volley Error : " + error.getMessage());
+                NetworkResponse networkResponse = error.networkResponse;
+                if (networkResponse != null ) {
+                    if (networkResponse.statusCode == 404) {
+                        Toast.makeText(ResultActivity.this, "Kode pos tidak diketahui", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                }
                 if (error instanceof NoConnectionError) {
                     Toast.makeText(ResultActivity.this, "Tidak ada koneksi internet", Toast.LENGTH_SHORT).show();
                 }else if (error instanceof NetworkError) {
@@ -251,7 +278,6 @@ public class ResultActivity extends AppCompatActivity {
             txtHari.setText(list.get(position).getHari());
             txtDeskripsi.setText(list.get(position).getDeskripsi());
             txtTemp.setText(list.get(position).getTemp());
-
 
             Picasso.with(context).load("http://openweathermap.org/img/wn/" + list.get(position).getIcon() + ".png").into(iconTemp);
             return view;
